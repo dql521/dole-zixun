@@ -2,6 +2,8 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import 'lib-flexible'
+import '../src/styles/base.css'
+import '../src/styles/iconfont.css'
 
 Vue.config.productionTip = false
 
