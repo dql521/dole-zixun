@@ -46,7 +46,7 @@ export default {
         this.$toast.fail('用户名或密码错误')
       } else {
         this.$toast.success('登录成功')
-        this.$router.push('/user')
+        this.$router.push('/profile')
       }
     }
   }
