@@ -1,6 +1,6 @@
 <template>
   <div class="login">
-    <div class="close">
+    <div class="close" @click="$router.go(-1)">
       <i class="iconfont iconicon-test"></i>
     </div>
     <div class="logo">
@@ -15,13 +15,14 @@
     <div class="btn">
       <hm-btn @click="login">登录</hm-btn>
     </div>
+    <div class="go-registered">
+      没有账号？立即<router-link to="/registered">注册</router-link>
+    </div>
   </div>
 </template>
 
 <script>
-import HmInput from '../components/HmInput'
-import HmBtn from '../components/HmBtn'
-import axios from 'axios'
+
 export default {
   data () {
     return {
@@ -29,21 +30,23 @@ export default {
       password: ''
     }
   },
-  components: {
-    HmInput,
-    HmBtn
+  created () {
+    const { username, password } = this.$route.params
+    this.username = username
+    this.password = password
   },
   methods: {
     async login () {
       if (!this.username || !this.password) return
-      const res = await axios.post('http://localhost:3000/login', {
+      const res = await this.$axios.post('/login', {
         username: this.username,
         password: this.password
       })
       if (res.data.statusCode === 401) {
-        alert('用户名或密码错误')
+        this.$toast.fail('用户名或密码错误')
       } else {
-        alert('登录成功')
+        this.$toast.success('登录成功')
+        this.$router.push('/user')
       }
     }
   }
@@ -68,6 +71,15 @@ export default {
   }
   .btn{
     margin-top: 20px;
+  }
+   .go-registered{
+    text-align: center;
+    font-size: 14px;
+    color: #666;
+    margin-top: 10px;
+    a{
+      color: cadetblue;
+    }
   }
 }
 </style>
