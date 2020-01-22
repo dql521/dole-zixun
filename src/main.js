@@ -10,11 +10,13 @@ import axios from 'axios'
 import HmInput from './components/HmInput.vue'
 import HmBtn from './components/HmBtn'
 import HmNav from './components/HmNav.vue'
+import HmHeader from './components/HmHeader.vue'
 import moment from 'moment'
 
 Vue.component('HmInput', HmInput)
 Vue.component('HmBtn', HmBtn)
 Vue.component('HmNav', HmNav)
+Vue.component('HmHeader', HmHeader)
 Vue.config.productionTip = false
 Vue.prototype.$axios = axios
 axios.defaults.baseURL = 'http://localhost:3000'
