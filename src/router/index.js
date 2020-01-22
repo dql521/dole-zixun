@@ -49,7 +49,7 @@ router.beforeEach(function (to, from, next) {
       next('/login')
     }
   } else {
-    next('/login')
+    next()
   }
 })
 

@@ -20,6 +20,17 @@ Vue.component('HmHeader', HmHeader)
 Vue.config.productionTip = false
 Vue.prototype.$axios = axios
 axios.defaults.baseURL = 'http://localhost:3000'
+axios.interceptors.response.use(function (response) {
+  if (response.data.statusCode === 401 && response.data.message === '用户信息验证失败') {
+    router.push('/login')
+    localStorage.removeItem('token')
+    localStorage.removeItem('user_id')
+    this.$toast.fail('用户信息获取失败')
+  }
+  return response
+}, function (error) {
+  return Promise.reject(error)
+})
 Vue.filter('time', function (input) {
   return moment(input).format('YYYY-MM-DD')
 })
