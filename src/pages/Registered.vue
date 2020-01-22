@@ -37,6 +37,9 @@ export default {
   },
   methods: {
     async registered () {
+      if (!this.form.username && !this.form.nickname && !this.form.password) {
+        return this.$toast.fail('内容不能为空')
+      }
       const res = await this.$axios.post('/register', this.form)
       if (res.data.status === 400) {
         this.$toast.fail('用户名已经存在')

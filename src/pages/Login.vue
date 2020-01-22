@@ -32,8 +32,12 @@ export default {
   },
   created () {
     const { username, password } = this.$route.params
+    console.log(this.$route.params)
+    console.log(username, password)
+
     this.username = username
     this.password = password
+    console.log(this.username, this.password)
   },
   methods: {
     async login () {
@@ -45,6 +49,11 @@ export default {
       if (res.data.statusCode === 401) {
         this.$toast.fail('用户名或密码错误')
       } else {
+        console.log(res)
+
+        const { token, user } = res.data.data
+        localStorage.setItem('token', token)
+        localStorage.setItem('user_id', user.id)
         this.$toast.success('登录成功')
         this.$router.push('/profile')
       }
