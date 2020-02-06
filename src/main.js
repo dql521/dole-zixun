@@ -25,11 +25,18 @@ axios.interceptors.response.use(function (response) {
     router.push('/login')
     localStorage.removeItem('token')
     localStorage.removeItem('user_id')
-    this.$toast.fail('用户信息获取失败')
+    Vant.$toast.fail('获取用户信息错误')
   }
   return response
 }, function (error) {
   return Promise.reject(error)
+})
+axios.interceptors.request.use(function (config) {
+  const token = localStorage.getItem('token')
+  if (token) {
+    config.headers.Authorization = token
+  }
+  return config
 })
 Vue.filter('time', function (input) {
   return moment(input).format('YYYY-MM-DD')
