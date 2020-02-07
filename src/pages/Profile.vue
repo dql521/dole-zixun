@@ -17,8 +17,8 @@
       </div>
     </div>
     <div class="list">
-      <hm-nav name="我的关注" desc="关注的用户"></hm-nav>
-      <hm-nav name="我得跟帖" desc="跟帖/回复"></hm-nav>
+      <hm-nav name="我的关注" desc="关注的用户" @click="$router.push('/follow')"></hm-nav>
+      <hm-nav name="我得跟帖" desc="跟帖/回复" @click="$router.push('/my-comments')"></hm-nav>
       <hm-nav name="我的收藏" desc="文章/视频"></hm-nav>
       <hm-nav name="设置" @click="$router.push('/edit-profile')"></hm-nav>
       <hm-nav name="退出登录" @click="logout"></hm-nav>
@@ -38,14 +38,11 @@ export default {
   async created () {
     const token = localStorage.getItem('token')
     const userId = localStorage.getItem('user_id')
-    console.log(userId)
-
     const res = await this.$axios.get(`/user/${userId}`, {
       headers: {
         Authorization: token
       }
     })
-    console.log(res)
 
     this.profile = res.data.data
     this.loading = true

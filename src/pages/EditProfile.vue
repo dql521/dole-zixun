@@ -33,12 +33,29 @@
         </van-cell-group>
       </van-radio-group>
     </van-dialog>
+    <!-- 头像裁剪 -->
+  <div class="mask" v-show="isShowMask">
+     <vueCropper
+       ref="cropper"
+       :img="option.img"
+       :autoCrop="option.autoCrop"
+       :fixed="option.fixed"
+       :fixedNumber="option.fixedNumber"
+       :autoCropWidth="option.autoCropWidth"
+      :autoCropHeight="option.autoCropHeight">
+          </vueCropper>
+  <van-button type="default" @click="crop">裁剪</van-button>
+    </div>
   </div>
 </template>
 
 <script>
+import { VueCropper } from 'vue-cropper'
 import img from '../assets/img.png'
 export default {
+  components: {
+    VueCropper
+  },
   data () {
     return {
       profile: {},
@@ -48,7 +65,17 @@ export default {
       isShowPassword: false,
       password: '',
       isShowGender: false,
-      gender: 0
+      gender: 0,
+      isShowMask: false,
+      option: {
+        img: '', // 裁剪图片的地址
+        outputType: 'jpeg', // 裁剪生成图片的格式
+        autoCrop: true, // 是否默认生成截图框
+        autoCropWidth: 300, // 默认生成截图框宽度
+        autoCropHeight: 200, // 默认生成截图框高度
+        fixed: true, // 是否开启截图框宽高固定比例
+        fixedNumber: [1, 1] // 截图框的宽高比例
+      }
     }
   },
   computed: {
@@ -100,22 +127,32 @@ export default {
       this.editProfile({ gender: this.gender })
     },
     async afterRead (file) {
-      // 校验图片格式和大小
-      if (file.file.type === 'image/gif') {
-        this.$toast('头像不支持gif格式动图')
-        return
+      this.isShowMask = true
+      this.option.img = file.content
+    },
+    crop () {
+      this.$refs.cropper.getCropData(async imgData => {
+        const file = this.convertBase64UrlToBlob(imgData)
+        const fd = new FormData()
+        fd.append('file', file)
+        const res = await this.$axios.post('/upload', fd)
+        const { statusCode, data } = res.data
+        if (statusCode === 200) {
+          this.editProfile({ head_img: data.url })
+        }
+        this.isShowMask = false
+      })
+    },
+    // 可以把图片的base64编码转成一个file文件
+    convertBase64UrlToBlob (urlData) {
+      let bytes = window.atob(urlData.split(',')[1])// 去掉url的头，并转换为byte
+      // 处理异常,将ascii码小于0的转换为大于0
+      let ab = new ArrayBuffer(bytes.length)
+      let ia = new Uint8Array(ab)
+      for (var i = 0; i < bytes.length; i++) {
+        ia[i] = bytes.charCodeAt(i)
       }
-      if (file.file.size / 1024 >= 20) {
-        this.$toast('请上传20kb以内的图片')
-        return
-      }
-      const fd = new FormData()
-      fd.append('file', file.file)
-      const res = await this.$axios.post('/upload', fd)
-      const { statusCode, data } = res.data
-      if (statusCode === 200) {
-        this.editProfile({ head_img: data.url })
-      }
+      return new Blob([ab], { type: 'image/jpeg' })
     }
   }
 }
@@ -147,6 +184,20 @@ export default {
   margin: 10px auto;
   padding: 5px;
   width: 90%;
-
 }
+.mask {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  z-index: 999;
+  top: 0;
+  left: 0;
+//   .van-button {
+//   position: fixed;
+//   bottom: 0;
+//   left: 50%;
+//   transform: translateX(-50%);
+// }
+}
+
 </style>

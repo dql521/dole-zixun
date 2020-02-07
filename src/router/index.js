@@ -4,6 +4,9 @@ import Login from '../pages/Login.vue'
 import Registered from '../pages/Registered.vue'
 import Profile from '../pages/Profile.vue'
 import EditProfile from '../pages/EditProfile.vue'
+import Follow from '../pages/Follow.vue'
+import Test from '../pages/Test.vue'
+import MyComments from '../pages/MyComments.vue'
 
 Vue.use(VueRouter)
 
@@ -32,13 +35,30 @@ const router = new VueRouter({
       path: '/edit-profile',
       name: 'edit-profile',
       component: EditProfile
+    },
+    {
+      path: '/follow',
+      name: 'follow',
+      component: Follow
+    },
+    {
+      path: '/test',
+      name: 'test',
+      component: Test
+    },
+    {
+      path: '/my-comments',
+      name: 'my-comments',
+      component: MyComments
     }
   ]
 })
 
 const AuthUrls = [
   '/profile',
-  '/edit-profile'
+  '/edit-profile',
+  '/follow',
+  'my-comments'
 ]
 router.beforeEach(function (to, from, next) {
   const token = localStorage.getItem('token')
