@@ -7,6 +7,8 @@ import EditProfile from '../pages/EditProfile.vue'
 import Follow from '../pages/Follow.vue'
 import Test from '../pages/Test.vue'
 import MyComments from '../pages/MyComments.vue'
+import MyStar from '../pages/MyStar.vue'
+import Home from '../pages/Home.vue'
 
 Vue.use(VueRouter)
 
@@ -19,7 +21,8 @@ const router = new VueRouter({
     },
     {
       path: '/',
-      redirect: '/login'
+      name: 'home',
+      component: Home
     },
     {
       path: '/registered',
@@ -50,6 +53,11 @@ const router = new VueRouter({
       path: '/my-comments',
       name: 'my-comments',
       component: MyComments
+    },
+    {
+      path: '/my-star',
+      name: 'my-star',
+      component: MyStar
     }
   ]
 })
@@ -58,7 +66,8 @@ const AuthUrls = [
   '/profile',
   '/edit-profile',
   '/follow',
-  'my-comments'
+  'my-comments',
+  '/my-star'
 ]
 router.beforeEach(function (to, from, next) {
   const token = localStorage.getItem('token')
@@ -66,7 +75,7 @@ router.beforeEach(function (to, from, next) {
     if (token) {
       next()
     } else {
-      next('/login')
+      router.push('/login')
     }
   } else {
     next()
