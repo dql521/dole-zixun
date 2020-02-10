@@ -9,6 +9,7 @@ import Test from '../pages/Test.vue'
 import MyComments from '../pages/MyComments.vue'
 import MyStar from '../pages/MyStar.vue'
 import Home from '../pages/Home.vue'
+import PostDetail from '../pages/PostDetail.vue'
 
 Vue.use(VueRouter)
 
@@ -58,6 +59,11 @@ const router = new VueRouter({
       path: '/my-star',
       name: 'my-star',
       component: MyStar
+    },
+    {
+      path: '/post-detail:id',
+      name: 'post-detail',
+      component: PostDetail
     }
   ]
 })

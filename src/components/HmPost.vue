@@ -1,5 +1,5 @@
 <template>
-  <div class="hm-post">
+  <div class="hm-post" @click="$router.push(`/post-detail${post.id}`)">
     <!-- 视频类 -->
     <div class="video-post" v-if="post.type === 2">
       <div class="title txt-cut">{{post.title}}</div>
