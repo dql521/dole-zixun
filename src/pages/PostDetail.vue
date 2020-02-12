@@ -161,8 +161,6 @@ export default {
         content: this.content,
         parent_id: this.parentId
       })
-      console.log(res)
-
       const { statusCode } = res.data
       if (statusCode === 200) {
         this.$toast.success('评论成功')
@@ -176,6 +174,7 @@ export default {
   watch: {
     $route () {
       this.getDetail()
+      this.commentList()
     }
   }
 }

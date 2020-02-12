@@ -1,11 +1,11 @@
 <template>
 <div class="wrapper">
-  <hm-floor v-if="comment.parent" :comment="comment.parent" :index="index-1"></hm-floor>
+  <hm-floor v-if="comment.parent" :comment="comment.parent" :index="index-1" @reply="reply"></hm-floor>
   <div class="hm-floor">
       <div class="title">
         <div class="name">{{index}} {{comment.user.nickname}}</div>
         <div class="time">{{comment.create_date | time('YYYY-MM-DD HH:mm:ss')}}</div>
-        <div class="reply">回复</div>
+        <div class="reply" @click="reply(comment.id)">回复</div>
       </div>
       <div class="content">{{comment.content}}</div>
     </div>
@@ -18,6 +18,11 @@ export default {
   props: {
     comment: Object,
     index: Number
+  },
+  methods: {
+    reply (id) {
+      this.$emit('reply', id)
+    }
   }
 }
 </script>

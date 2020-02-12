@@ -8,7 +8,7 @@
       </div>
       <div class="reply" @click="reply(comment.id)">回复</div>
     </div>
-    <hm-floor :index="index" v-if="comment.parent" :comment="comment.parent"></hm-floor>
+    <hm-floor :index="index" v-if="comment.parent" :comment="comment.parent" @reply="reply"></hm-floor>
     <div class="content">{{comment.content}}</div>
   </div>
 </template>

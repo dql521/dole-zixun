@@ -10,6 +10,7 @@ import MyComments from '../pages/MyComments.vue'
 import MyStar from '../pages/MyStar.vue'
 import Home from '../pages/Home.vue'
 import PostDetail from '../pages/PostDetail.vue'
+import TabManage from '../pages/TabManage.vue'
 
 Vue.use(VueRouter)
 
@@ -64,6 +65,11 @@ const router = new VueRouter({
       path: '/post-detail:id',
       name: 'post-detail',
       component: PostDetail
+    },
+    {
+      path: '/tab-manage',
+      name: 'tab-manage',
+      component: TabManage
     }
   ]
 })
@@ -73,7 +79,8 @@ const AuthUrls = [
   '/edit-profile',
   '/follow',
   'my-comments',
-  '/my-star'
+  '/my-star',
+  '/tab-manage'
 ]
 router.beforeEach(function (to, from, next) {
   const token = localStorage.getItem('token')

@@ -17,13 +17,13 @@
         <van-pull-refresh v-model="refreshing" @refresh="onRefresh">
         <van-list
             v-model="loading"
-            :finished="item.finished"
+            :finished="finished"
             finished-text="没有更多了"
             @load="onLoad"
             :immediate-check="false"
             :offset="50"
           >
-        <hm-post v-for="post in item.postList" :key="post.id" :post="post"></hm-post>
+        <hm-post v-for="post in postList" :key="post.id" :post="post"></hm-post>
         </van-list>
         </van-pull-refresh>
       </van-tab>
@@ -34,13 +34,17 @@
 <script>
 import HmPost from '../components/HmPost'
 export default {
+  name: 'home',
   data () {
     return {
       active: 0,
       tabList: [],
+      postList: [],
+      pageIndex: 1,
       pageSize: 5,
       loading: false,
-      refreshing: false
+      refreshing: false,
+      finished: false
     }
   },
   async created () {
@@ -49,15 +53,15 @@ export default {
   },
   methods: {
     async getTabList () {
-      const res = await this.$axios.get('/category')
-      const { statusCode, data } = res.data
-      if (statusCode === 200) {
-        data.forEach(item => {
-          item.postList = []
-          item.pageIndex = 1
-          item.finished = false
-        })
-        this.tabList = data
+      const activeTabs = JSON.parse(localStorage.getItem('activeTabs'))
+      if (activeTabs) {
+        this.tabList = activeTabs
+      } else {
+        const res = await this.$axios.get('/category')
+        const { statusCode, data } = res.data
+        if (statusCode === 200) {
+          this.tabList = data
+        }
       }
     },
     async getPostList () {
@@ -65,42 +69,43 @@ export default {
       const res = await this.$axios.get('/post', {
         params: {
           category: id,
-          pageIndex: this.tabList[this.active].pageIndex,
+          pageIndex: this.pageIndex,
           pageSize: this.pageSize
         }
       })
       const { statusCode, data } = res.data
       if (statusCode === 200) {
-        this.tabList[this.active].postList = [...this.tabList[this.active].postList, ...data]
+        this.postList = [...this.postList, ...data]
         this.loading = false
         setTimeout(() => {
           this.refreshing = false
         }, 1000)
         if (data.length < this.pageSize) {
-          this.tabList[this.active].finished = true
+          this.finished = true
         }
       }
     },
     onLoad () {
       setTimeout(() => {
-        this.tabList[this.active].pageIndex++
+        this.pageIndex++
         this.getPostList()
       }, 1000)
     },
     onRefresh () {
       this.loading = true
-      this.tabList[this.active].pageIndex = 1
-      this.tabList[this.active].postList = []
-      this.tabList[this.active].finished = false
-      this.getPostList()
+      this.pageIndex = 1
+      this.postList = []
+      this.finished = false
+      this.onLoad()
     }
   },
   watch: {
     active (value) {
-      if (this.tabList[this.active].postList.length > 0) {
-        return
-      }
-      this.getPostList()
+      this.pageIndex = 0
+      this.postList = []
+      this.finished = false
+      this.loading = true
+      this.onLoad()
     }
   },
   components: {
