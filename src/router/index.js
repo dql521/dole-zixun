@@ -11,6 +11,7 @@ import MyStar from '../pages/MyStar.vue'
 import Home from '../pages/Home.vue'
 import PostDetail from '../pages/PostDetail.vue'
 import TabManage from '../pages/TabManage.vue'
+import Search from '../pages/Search.vue'
 
 Vue.use(VueRouter)
 
@@ -70,6 +71,11 @@ const router = new VueRouter({
       path: '/tab-manage',
       name: 'tab-manage',
       component: TabManage
+    },
+    {
+      path: '/search',
+      name: 'search',
+      component: Search
     }
   ]
 })
