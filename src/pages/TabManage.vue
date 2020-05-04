@@ -1,6 +1,6 @@
 <template>
   <div class="tab-manage">
-    <hm-header>栏目管理</hm-header>
+    <do-header>栏目管理</do-header>
     <div class="content">
       <div class="title">点击删除以下频道（至少保留3个）</div>
       <div class="list">

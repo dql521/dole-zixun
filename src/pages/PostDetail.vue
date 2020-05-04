@@ -38,12 +38,12 @@
     <!-- 评论 -->
     <div class="post-commnet">
       <div class="title">精彩跟帖</div>
-      <hm-comment
+      <do-comment
         v-for="item in commentList"
         :key="item.id"
         :comment="item"
         @reply="reply">
-        </hm-comment>
+        </do-comment>
     </div>
     <!-- 底部 -->
     <div class="footer">
@@ -65,10 +65,10 @@
 </template>
 
 <script>
-import HmComment from '../components/HmComment'
+import DoComment from '../components/DoComment'
 export default {
   components: {
-    HmComment
+    DoComment
   },
   data () {
     return {

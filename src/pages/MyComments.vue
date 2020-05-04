@@ -1,6 +1,6 @@
 <template>
   <div class="my-comments">
-    <hm-header>我的跟帖</hm-header>
+    <do-header>我的跟帖</do-header>
     <van-list
       v-model="loading"
       :finished="finished"

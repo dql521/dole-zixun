@@ -1,6 +1,6 @@
 <template>
   <div class="follow">
-    <hm-header>我的关注</hm-header>
+    <do-header>我的关注</do-header>
     <div class="item" v-for="item in followList" :key="item.id">
       <div class="left">
         <img :src="$axios.defaults.baseURL + item.head_img" alt="">

@@ -7,16 +7,16 @@ import 'vant/lib/index.css'
 import '../src/styles/base.css'
 import '../src/styles/iconfont.css'
 import axios from 'axios'
-import HmInput from './components/HmInput.vue'
-import HmBtn from './components/HmBtn'
-import HmNav from './components/HmNav.vue'
-import HmHeader from './components/HmHeader.vue'
+import DoInput from './components/DoInput.vue'
+import DoBtn from './components/DoBtn'
+import DoNav from './components/DoNav.vue'
+import DoHeader from './components/DoHeader.vue'
 import moment from 'moment'
 
-Vue.component('HmInput', HmInput)
-Vue.component('HmBtn', HmBtn)
-Vue.component('HmNav', HmNav)
-Vue.component('HmHeader', HmHeader)
+Vue.component('DoInput', DoInput)
+Vue.component('DoBtn', DoBtn)
+Vue.component('DoNav', DoNav)
+Vue.component('DoHeader', DoHeader)
 // 隐藏提示铭文
 Vue.config.productionTip = false
 // axios全局定义

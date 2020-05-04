@@ -12,7 +12,7 @@
     </div>
 
     <div class="post-list" v-if="postList.length > 0">
-      <hm-post v-for="item in postList" :key="item.id" :post="item"></hm-post>
+      <do-post v-for="item in postList" :key="item.id" :post="item"></do-post>
     </div>
     <div class="content" v-else>
       <h3>历史记录</h3>
@@ -29,10 +29,10 @@
 </template>
 
 <script>
-import HmPost from '../components/HmPost'
+import DoPost from '../components/DoPost'
 export default {
   components: {
-    HmPost
+    DoPost
   },
   data () {
     return {

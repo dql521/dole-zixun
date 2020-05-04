@@ -23,7 +23,7 @@
             :immediate-check="false"
             :offset="50"
           >
-        <hm-post v-for="post in postList" :key="post.id" :post="post"></hm-post>
+        <do-post v-for="post in postList" :key="post.id" :post="post"></do-post>
         </van-list>
         </van-pull-refresh>
       </van-tab>
@@ -32,7 +32,7 @@
 </template>
 
 <script>
-import HmPost from '../components/HmPost'
+import DoPost from '../components/DoPost'
 export default {
   name: 'home',
   data () {
@@ -109,7 +109,7 @@ export default {
     }
   },
   components: {
-    HmPost
+    DoPost
   }
 }
 </script>

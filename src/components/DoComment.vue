@@ -1,5 +1,5 @@
 <template>
-  <div class="hm-comment">
+  <div class="do-comment">
     <div class="title">
       <img :src="$axios.defaults.baseURL + comment.user.head_img" alt="">
       <div class="info">
@@ -8,13 +8,13 @@
       </div>
       <div class="reply" @click="reply(comment.id)">回复</div>
     </div>
-    <hm-floor :index="index" v-if="comment.parent" :comment="comment.parent" @reply="reply"></hm-floor>
+    <do-floor :index="index" v-if="comment.parent" :comment="comment.parent" @reply="reply"></do-floor>
     <div class="content">{{comment.content}}</div>
   </div>
 </template>
 
 <script>
-import HmFloor from './HmFloor'
+import DoFloor from './DoFloor'
 export default {
   data () {
     return {
@@ -22,7 +22,7 @@ export default {
     }
   },
   components: {
-    HmFloor
+    DoFloor
   },
   props: {
     comment: Object
@@ -43,7 +43,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.hm-comment {
+.do-comment {
   padding: 10px;
   border-bottom: 1px solid #ccc;
   .title {

@@ -1,6 +1,6 @@
 <template>
   <div class="profile">
-    <hm-header>个人中心</hm-header>
+    <do-header>个人中心</do-header>
     <div class="user_info" @click="$router.push('/edit-profile')">
       <div class="avatar">
         <img v-show="loading" :src="avatar">
@@ -18,12 +18,12 @@
       </div>
     </div>
     <div class="list">
-      <hm-nav name="我的关注" desc="关注的用户" @click="$router.push('/follow')"></hm-nav>
-      <hm-nav name="我得跟帖" desc="跟帖/回复" @click="$router.push('/my-comments')"></hm-nav>
-      <hm-nav name="我的收藏" desc="文章/视频" @click="$router.push('/my-star')"></hm-nav>
-      <hm-nav name="栏目管理" @click="$router.push('/tab-manage')"></hm-nav>
-      <hm-nav name="设置" @click="$router.push('/edit-profile')"></hm-nav>
-      <hm-nav name="退出登录" @click="logout"></hm-nav>
+      <do-nav name="我的关注" desc="关注的用户" @click="$router.push('/follow')"></do-nav>
+      <do-nav name="我得跟帖" desc="跟帖/回复" @click="$router.push('/my-comments')"></do-nav>
+      <do-nav name="我的收藏" desc="文章/视频" @click="$router.push('/my-star')"></do-nav>
+      <do-nav name="栏目管理" @click="$router.push('/tab-manage')"></do-nav>
+      <do-nav name="设置" @click="$router.push('/edit-profile')"></do-nav>
+      <do-nav name="退出登录" @click="logout"></do-nav>
     </div>
   </div>
 </template>

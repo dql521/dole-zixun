@@ -1,15 +1,15 @@
 <template>
   <div class="edit-profile">
-    <hm-header>编辑资料</hm-header>
+    <do-header>编辑资料</do-header>
     <div class="user_box">
       <div class="avatar">
         <img :src="avatar">
         <!-- 上传组件 -->
         <van-uploader :after-read="afterRead"/>
       </div>
-      <hm-nav name="昵称" :desc="profile.nickname" @click="ShowNickname"></hm-nav>
-      <hm-nav name="密码" desc="******" @click="showPassword"></hm-nav>
-      <hm-nav name="性别" :desc="profile.gender === 1 ? '男' : '女'" @click="showGender"></hm-nav>
+      <do-nav name="昵称" :desc="profile.nickname" @click="ShowNickname"></do-nav>
+      <do-nav name="密码" desc="******" @click="showPassword"></do-nav>
+      <do-nav name="性别" :desc="profile.gender === 1 ? '男' : '女'" @click="showGender"></do-nav>
     </div>
     <!-- 显示昵称 -->
     <van-dialog v-model="isShowNickname" title="修改昵称" show-cancel-button @confirm="editNickname">

@@ -1,12 +1,12 @@
 <template>
   <div class="my-star">
-    <hm-header>我的收藏</hm-header>
-    <hm-post v-for="item in list" :key="item.id" :post="item"></hm-post>
+    <do-header>我的收藏</do-header>
+    <do-post v-for="item in list" :key="item.id" :post="item"></do-post>
   </div>
 </template>
 
 <script>
-import HmPost from '../components/HmPost'
+import DoPost from '../components/DoPost'
 export default {
   data () {
     return {
@@ -26,7 +26,7 @@ export default {
     }
   },
   components: {
-    HmPost
+    DoPost
   }
 }
 </script>

@@ -7,16 +7,16 @@
       <i class="iconfont iconnew"></i>
     </div>
     <div class="username">
-      <hm-input type="text" placeholder="请输入用户名" v-model="form.username" :rules="/^1\d{4,10}$/" esg="请输入正确的用户名"></hm-input>
+      <do-input type="text" placeholder="请输入用户名" v-model="form.username" :rules="/^1\d{4,10}$/" esg="请输入正确的用户名"></do-input>
     </div>
     <div class="nickname">
-      <hm-input type="text" placeholder="请输入昵称" v-model="form.nickname" :rules="/^[\u4e00-\u9fa5]{3,8}$/" esg="请输入正确的昵称"></hm-input>
+      <do-input type="text" placeholder="请输入昵称" v-model="form.nickname" :rules="/^[\u4e00-\u9fa5]{3,8}$/" esg="请输入正确的昵称"></do-input>
     </div>
     <div class="password">
-      <hm-input type="password" placeholder="请输入密码" v-model="form.password" :rules="/^\d{3,12}$/" esg="请输入3-12位数字密码"></hm-input>
+      <do-input type="password" placeholder="请输入密码" v-model="form.password" :rules="/^\d{3,12}$/" esg="请输入3-12位数字密码"></do-input>
     </div>
     <div class="btn">
-      <hm-btn @click="registered">注册</hm-btn>
+      <do-btn @click="registered">注册</do-btn>
     </div>
     <div class="go-login">
       已有账号？立即<router-link to="/login">登录</router-link>
