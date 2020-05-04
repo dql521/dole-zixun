@@ -17,9 +17,12 @@ Vue.component('HmInput', HmInput)
 Vue.component('HmBtn', HmBtn)
 Vue.component('HmNav', HmNav)
 Vue.component('HmHeader', HmHeader)
+// 隐藏提示铭文
 Vue.config.productionTip = false
+// axios全局定义
 Vue.prototype.$axios = axios
 axios.defaults.baseURL = 'http://localhost:3000'
+// 请求拦截器-响应
 axios.interceptors.response.use(function (response) {
   if (response.data.statusCode === 401 && response.data.message === '用户信息验证失败') {
     router.push('/login')
@@ -31,6 +34,7 @@ axios.interceptors.response.use(function (response) {
 }, function (error) {
   return Promise.reject(error)
 })
+// 请求拦截器-请求
 axios.interceptors.request.use(function (config) {
   const token = localStorage.getItem('token')
   if (token) {
@@ -38,6 +42,7 @@ axios.interceptors.request.use(function (config) {
   }
   return config
 })
+// 时间过滤器
 Vue.filter('time', function (input) {
   return moment(input).format('YYYY-MM-DD')
 })

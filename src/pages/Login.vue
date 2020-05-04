@@ -35,7 +35,6 @@ export default {
 
     this.username = username
     this.password = password
-    console.log(this.username, this.password)
   },
   methods: {
     async login () {
